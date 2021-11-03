@@ -21,10 +21,6 @@
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\""
   },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": "eslint",
-    "**/*.{js,jsx,json,ts,tsx}": "prettier --write"
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -57,7 +53,6 @@
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.26.1",
-    "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
     "node-sass": "^6.0.1",
     "prettier": "^2.4.1",
