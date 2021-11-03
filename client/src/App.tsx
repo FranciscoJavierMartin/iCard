@@ -1,7 +1,12 @@
 import React, { ReactElement } from 'react';
+import Navigation from './routes/Navigation';
 
 function App(): ReactElement {
-  return <div>Test1</div>;
+  return (
+    <div>
+      <Navigation />
+    </div>
+  );
 }
 
 export default App;
