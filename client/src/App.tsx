@@ -1,6 +1,6 @@
 import React from 'react';
 
-function App(): JSX.Element {
+function App(): void {
   const test = '';
   return <div></div>;
 }
