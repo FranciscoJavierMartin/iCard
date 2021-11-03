@@ -1,3 +1,3 @@
-const routesClient = [];
+const routesClient: any[] = [];
 
 export default routesClient;
