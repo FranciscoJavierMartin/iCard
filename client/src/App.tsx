@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-function App(): void {
-  return <div>Test12</div>;
+function App(): ReactElement {
+  return <div>Test1</div>;
 }
 
 export default App;
