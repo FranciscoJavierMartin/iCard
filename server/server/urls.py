@@ -19,6 +19,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from users.api.router import router_user
+
 schema_view = get_schema_view(
     openapi.Info(
         title="iCard API",
@@ -36,5 +38,5 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api/', include(router_user.urls))
 ]
