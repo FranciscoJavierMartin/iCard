@@ -1,4 +1,5 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useContext } from 'react';
+import { AuthContext } from 'src/contexts';
 import { LoginAdmin } from 'src/pages/admin';
 import './AdminLayout.scss';
 
@@ -9,7 +10,7 @@ interface AdminLayoutProps {
 export default function AdminLayout({
   children,
 }: AdminLayoutProps): ReactElement {
-  const auth: any = null;
+  const { auth } = useContext(AuthContext);
 
   return auth ? (
     <div>

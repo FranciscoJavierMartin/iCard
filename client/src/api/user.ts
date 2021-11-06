@@ -1,10 +1,11 @@
+import { User } from 'src/interfaces/auth';
 import { LoginResponse } from 'src/interfaces/responses';
 
 export async function loginApi(
   email: string,
   password: string
 ): Promise<LoginResponse> {
-  let body: any;
+  let body: LoginResponse;
 
   try {
     const response = await fetch(
@@ -18,11 +19,21 @@ export async function loginApi(
     body = await response.json();
 
     if (response.status !== 200) {
-      throw new Error(body.detail);
+      throw new Error((body as any).detail);
     }
   } catch (error: any) {
     throw new Error(error);
   }
 
   return body;
+}
+
+export async function getMeApi(token: string): Promise<User> {
+  const response = await fetch(`${process.env.REACT_APP_SERVER_URL}auth/me/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
 }

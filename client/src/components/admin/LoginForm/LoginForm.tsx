@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { loginApi } from '../../../api/user';
+import { AuthContext, AuthContextState } from 'src/contexts/auth/AuthContext';
+import { loginApi } from 'src/api/user';
 import './LoginForm.scss';
 
 interface FormValues {
@@ -17,6 +18,8 @@ const initialValues: FormValues = {
 };
 
 export default function LoginForm() {
+  const { login } = useContext<AuthContextState>(AuthContext);
+
   const formik = useFormik<FormValues>({
     initialValues,
     validationSchema: Yup.object({
@@ -26,6 +29,7 @@ export default function LoginForm() {
     onSubmit: async (formValues: FormValues) => {
       try {
         const response = await loginApi(formValues.email, formValues.password);
+        await login(response.access);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         toast.error(error.toString());
