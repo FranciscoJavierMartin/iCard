@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
+import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginApi } from '../../../api/user';
@@ -25,8 +26,9 @@ export default function LoginForm() {
     onSubmit: async (formValues: FormValues) => {
       try {
         const response = await loginApi(formValues.email, formValues.password);
-      } catch (error) {
-        console.log(error);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        toast.error(error.toString());
       }
     },
   });
