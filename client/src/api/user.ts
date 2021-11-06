@@ -37,3 +37,12 @@ export async function getMeApi(token: string): Promise<User> {
 
   return await response.json();
 }
+
+export async function getUsersApi(token: string): Promise<User[]> {
+  const response = await fetch(`${process.env.REACT_APP_SERVER_URL}users/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return await response.json();
+}
