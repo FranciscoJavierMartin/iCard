@@ -1,5 +1,6 @@
 import React, { ReactElement, ReactNode, useContext } from 'react';
 import TopMenu from 'src/components/admin/TopMenu/TopMenu';
+import SideMenu from 'src/components/admin/SideMenu/SideMenu';
 import { AuthContext } from 'src/contexts';
 import { LoginAdmin } from 'src/pages/admin';
 import './AdminLayout.scss';
@@ -18,7 +19,9 @@ export default function AdminLayout({
       <div className='admin-layout__menu'>
         <TopMenu />
       </div>
-      <div className='admin-layout__main-content'>{children}</div>
+      <div className='admin-layout__main-content'>
+        <SideMenu>{children}</SideMenu>
+      </div>
     </div>
   ) : (
     <LoginAdmin />
