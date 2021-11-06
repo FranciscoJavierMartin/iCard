@@ -2,25 +2,37 @@ import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { loginApi } from '../../../api/user';
 import './LoginForm.scss';
 
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+const initialValues: FormValues = {
+  email: '',
+  password: '',
+};
+
 export default function LoginForm() {
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
+  const formik = useFormik<FormValues>({
+    initialValues,
     validationSchema: Yup.object({
       email: Yup.string().email().required(),
       password: Yup.string().required(),
     }),
-    onSubmit: formValues => {
-      console.log('Email sent');
+    onSubmit: async (formValues: FormValues) => {
+      try {
+        const response = await loginApi(formValues.email, formValues.password);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
   return (
-    <Form className='login-form-admin'>
+    <Form className='login-form-admin' onSubmit={formik.handleSubmit}>
       <Form.Input
         name='email'
         placeholder='Email'

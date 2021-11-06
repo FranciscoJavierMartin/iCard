@@ -1,5 +1,6 @@
 module.exports = {
   env: {
+    node: true,
     browser: true,
     es2021: true,
   },
@@ -25,6 +26,6 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-unused-vars': 'warn',
-    'no-console': 'warn',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
   },
 };
