@@ -56,7 +56,7 @@ export default function AddEditUserForm({
   onRefetch,
   user,
 }: AddEditUserFormProps) {
-  const { addUser, error, loading } = useUser();
+  const { addUser, error, loading, updateUser } = useUser();
 
   const formik = useFormik<FormValues>({
     initialValues: user ? { ...user, password: '' } : initialValues,
@@ -66,7 +66,11 @@ export default function AddEditUserForm({
     validateOnChange: false,
     onSubmit: async (formValues: FormValues) => {
       try {
-        addUser(formValues);
+        if (user) {
+          updateUser(user.id, formValues);
+        } else {
+          addUser(formValues);
+        }
         onRefetch();
         toggleModal();
       } catch (error) {
