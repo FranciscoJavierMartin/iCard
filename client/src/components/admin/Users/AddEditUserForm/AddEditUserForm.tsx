@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './AddEditUserForm.scss';
 import { useUser } from 'src/hooks';
+import { User } from 'src/interfaces/auth';
 
 interface FormValues {
   username: string;
@@ -18,6 +19,7 @@ interface FormValues {
 interface AddEditUserFormProps {
   toggleModal: () => void;
   onRefetch: () => void;
+  user?: User;
 }
 
 const initialValues = {
@@ -30,7 +32,7 @@ const initialValues = {
   is_staff: false,
 };
 
-const validationSchema = Yup.object({
+const addUserValidationSchema = Yup.object({
   username: Yup.string().required(),
   email: Yup.string().email().required(),
   first_name: Yup.string(),
@@ -40,15 +42,27 @@ const validationSchema = Yup.object({
   is_staff: Yup.bool().required(),
 });
 
+const updateUserValidationSchema = Yup.object({
+  username: Yup.string().required(),
+  email: Yup.string().email().required(),
+  first_name: Yup.string(),
+  last_name: Yup.string(),
+  is_active: Yup.bool().required(),
+  is_staff: Yup.bool().required(),
+});
+
 export default function AddEditUserForm({
   toggleModal,
   onRefetch,
+  user,
 }: AddEditUserFormProps) {
   const { addUser, error, loading } = useUser();
 
   const formik = useFormik<FormValues>({
-    initialValues,
-    validationSchema,
+    initialValues: user ? { ...user, password: '' } : initialValues,
+    validationSchema: user
+      ? updateUserValidationSchema
+      : addUserValidationSchema,
     validateOnChange: false,
     onSubmit: async (formValues: FormValues) => {
       try {
@@ -119,7 +133,12 @@ export default function AddEditUserForm({
         />
         Is admin user?
       </div>
-      <Button type='submit' content='Create user' primary fluid />
+      <Button
+        type='submit'
+        content={user ? 'Update user' : 'Create user'}
+        primary
+        fluid
+      />
     </Form>
   );
 }

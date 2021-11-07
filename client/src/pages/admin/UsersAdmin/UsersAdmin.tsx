@@ -3,6 +3,7 @@ import { Loader } from 'semantic-ui-react';
 import { TableUsers, Header, AddEditUserForm } from 'src/components/admin';
 import { ModalBasic } from 'src/components/common';
 import { useUser } from 'src/hooks';
+import { User } from 'src/interfaces/auth';
 
 export default function UsersAdmin() {
   const [titleModal, setTitleModal] = useState<string>('');
@@ -26,6 +27,18 @@ export default function UsersAdmin() {
     toggleModal();
   };
 
+  const updateUser = (user: User) => {
+    setTitleModal(`Update ${user.username}`);
+    setContentModal(
+      <AddEditUserForm
+        toggleModal={toggleModal}
+        onRefetch={onRefetch}
+        user={user}
+      />
+    );
+    toggleModal();
+  };
+
   return (
     <>
       <Header title='Users' btnTitle='New user' btnClick={addUser} />
@@ -34,7 +47,7 @@ export default function UsersAdmin() {
           Loading...
         </Loader>
       ) : (
-        <TableUsers users={users} />
+        <TableUsers users={users} updateUser={updateUser} />
       )}
       <ModalBasic show={showModal} title={titleModal} onClose={toggleModal}>
         {contentModal}

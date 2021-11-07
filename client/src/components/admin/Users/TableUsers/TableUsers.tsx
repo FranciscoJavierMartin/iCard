@@ -5,9 +5,10 @@ import './TableUsers.scss';
 
 interface TableUsersProps {
   users: User[];
+  updateUser: (user: User) => void;
 }
 
-export default function TableUsers({ users }: TableUsersProps) {
+export default function TableUsers({ users, updateUser }: TableUsersProps) {
   return (
     <Table className='table-users-admin'>
       <Table.Header>
@@ -48,7 +49,7 @@ export default function TableUsers({ users }: TableUsersProps) {
               <Button
                 icon
                 onClick={() => {
-                  console.log('');
+                  updateUser(user);
                 }}
               >
                 <Icon name='pencil' />
