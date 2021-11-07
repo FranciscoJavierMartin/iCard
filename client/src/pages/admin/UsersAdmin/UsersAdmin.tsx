@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Loader } from 'semantic-ui-react';
-import { TableUsers, Header, AddEditUserForm } from 'src/components/admin';
+import {
+  TableUsers,
+  Header,
+  AddEditUserForm,
+  RemoveUserForm,
+} from 'src/components/admin';
 import { ModalBasic } from 'src/components/common';
 import { useUser } from 'src/hooks';
 import { User } from 'src/interfaces/auth';
@@ -19,7 +24,7 @@ export default function UsersAdmin() {
   const toggleModal = (): void => setShowModal(prevState => !prevState);
   const onRefetch = (): void => setRefetch(prevState => !prevState);
 
-  const addUser = () => {
+  const addUser = (): void => {
     setTitleModal('New user');
     setContentModal(
       <AddEditUserForm toggleModal={toggleModal} onRefetch={onRefetch} />
@@ -27,7 +32,7 @@ export default function UsersAdmin() {
     toggleModal();
   };
 
-  const updateUser = (user: User) => {
+  const updateUser = (user: User): void => {
     setTitleModal(`Update ${user.username}`);
     setContentModal(
       <AddEditUserForm
@@ -35,6 +40,14 @@ export default function UsersAdmin() {
         onRefetch={onRefetch}
         user={user}
       />
+    );
+    toggleModal();
+  };
+
+  const removeUser = (id: number): void => {
+    setTitleModal('Remove user');
+    setContentModal(
+      <RemoveUserForm toggleModal={toggleModal} id={id} onRefetch={onRefetch} />
     );
     toggleModal();
   };
@@ -47,7 +60,11 @@ export default function UsersAdmin() {
           Loading...
         </Loader>
       ) : (
-        <TableUsers users={users} updateUser={updateUser} />
+        <TableUsers
+          users={users}
+          updateUser={updateUser}
+          removeUser={removeUser}
+        />
       )}
       <ModalBasic show={showModal} title={titleModal} onClose={toggleModal}>
         {contentModal}

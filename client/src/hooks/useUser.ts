@@ -1,5 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { addUserApi, getMeApi, getUsersApi, updateUserApi } from 'src/api/user';
+import {
+  addUserApi,
+  getMeApi,
+  getUsersApi,
+  removeUserApi,
+  updateUserApi,
+} from 'src/api/user';
 import { AuthContext } from 'src/contexts';
 import { User } from 'src/interfaces/auth';
 import {
@@ -51,6 +57,17 @@ export function useUser() {
     }
   };
 
+  const removeUser = async (id: number): Promise<void> => {
+    try {
+      setLoading(true);
+      await removeUserApi(id, auth?.token || '');
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     error,
@@ -59,5 +76,6 @@ export function useUser() {
     getUsers,
     addUser,
     updateUser,
+    removeUser,
   };
 }

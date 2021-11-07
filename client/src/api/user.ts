@@ -86,3 +86,18 @@ export async function updateUserApi(
 
   return await response.json();
 }
+
+export async function removeUserApi(id: number, token: string): Promise<void> {
+  const response = await fetch(
+    `${process.env.REACT_APP_SERVER_URL}users/${id}/`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  return await response.json();
+}

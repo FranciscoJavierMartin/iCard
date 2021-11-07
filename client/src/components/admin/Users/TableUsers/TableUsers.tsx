@@ -6,9 +6,14 @@ import './TableUsers.scss';
 interface TableUsersProps {
   users: User[];
   updateUser: (user: User) => void;
+  removeUser: (id: number) => void;
 }
 
-export default function TableUsers({ users, updateUser }: TableUsersProps) {
+export default function TableUsers({
+  users,
+  updateUser,
+  removeUser,
+}: TableUsersProps) {
   return (
     <Table className='table-users-admin'>
       <Table.Header>
@@ -58,7 +63,7 @@ export default function TableUsers({ users, updateUser }: TableUsersProps) {
                 icon
                 negative
                 onClick={() => {
-                  console.log('');
+                  removeUser(user.id);
                 }}
               >
                 <Icon name='trash' />
