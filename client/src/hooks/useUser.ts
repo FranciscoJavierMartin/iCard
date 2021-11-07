@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { getMeApi, getUsersApi } from 'src/api/user';
+import { addUserApi, getMeApi, getUsersApi } from 'src/api/user';
 import { AuthContext } from 'src/contexts';
 import { User } from 'src/interfaces/auth';
+import { AddUserBodyRequest } from 'src/interfaces/requests';
 
 export function useUser() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -10,11 +11,22 @@ export function useUser() {
   const { auth } = useContext(AuthContext);
 
   const getMe = async (token: string): Promise<User> => await getMeApi(token);
-  const getUsers = async () => {
+  const getUsers = async (): Promise<void> => {
     try {
       setLoading(true);
       const response = await getUsersApi(auth?.token || '');
       setUsers(response);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addUser = async (data: AddUserBodyRequest): Promise<void> => {
+    try {
+      setLoading(true);
+      await addUserApi(data, auth?.token || '');
     } catch (error) {
       setError(error);
     } finally {
@@ -28,5 +40,6 @@ export function useUser() {
     users,
     getMe,
     getUsers,
+    addUser,
   };
 }

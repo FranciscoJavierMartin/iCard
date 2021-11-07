@@ -1,4 +1,5 @@
 import { User } from 'src/interfaces/auth';
+import { AddUserBodyRequest } from 'src/interfaces/requests';
 import { LoginResponse } from 'src/interfaces/responses';
 
 export async function loginApi(
@@ -44,5 +45,18 @@ export async function getUsersApi(token: string): Promise<User[]> {
       Authorization: `Bearer ${token}`,
     },
   });
+  return await response.json();
+}
+
+export async function addUserApi(data: AddUserBodyRequest, token: string): Promise<User> {
+  const response = await fetch(`${process.env.REACT_APP_SERVER_URL}users/`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
   return await response.json();
 }

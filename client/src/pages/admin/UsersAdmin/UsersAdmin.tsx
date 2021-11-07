@@ -8,17 +8,21 @@ export default function UsersAdmin() {
   const [titleModal, setTitleModal] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
   const [contentModal, setContentModal] = useState<any>(null);
+  const [refetch, setRefetch] = useState<boolean>(false);
   const { users, loading, getUsers } = useUser();
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [refetch]);
 
   const toggleModal = (): void => setShowModal(prevState => !prevState);
+  const onRefetch = (): void => setRefetch(prevState => !prevState);
 
   const addUser = () => {
     setTitleModal('New user');
-    setContentModal(<AddEditUserForm />);
+    setContentModal(
+      <AddEditUserForm toggleModal={toggleModal} onRefetch={onRefetch} />
+    );
     toggleModal();
   };
 
