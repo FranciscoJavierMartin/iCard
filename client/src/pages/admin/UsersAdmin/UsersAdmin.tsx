@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Loader } from 'semantic-ui-react';
-import { TableUsers } from 'src/components/admin';
-import { Header } from 'src/components/admin';
+import { TableUsers, Header, AddEditUserForm } from 'src/components/admin';
 import { ModalBasic } from 'src/components/common';
 import { useUser } from 'src/hooks';
 
@@ -17,9 +16,15 @@ export default function UsersAdmin() {
 
   const toggleModal = (): void => setShowModal(prevState => !prevState);
 
+  const addUser = () => {
+    setTitleModal('New user');
+    setContentModal(<AddEditUserForm />);
+    toggleModal();
+  };
+
   return (
     <>
-      <Header title='Users' btnTitle='New user' btnClick={toggleModal} />
+      <Header title='Users' btnTitle='New user' btnClick={addUser} />
       {loading ? (
         <Loader active inline='centered'>
           Loading...

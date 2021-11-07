@@ -1,5 +1,6 @@
-export { default as LoginForm } from './LoginForm/LoginForm';
-export { default as Header } from './Header/Header';
-export { default as SideMenu } from './SideMenu/SideMenu';
-export { default as TableUsers } from './TableUsers/TableUsers';
-export { default as TopMenu } from './TopMenu/TopMenu';
+export { default as LoginForm } from './Common/LoginForm/LoginForm';
+export { default as Header } from './Common/Header/Header';
+export { default as SideMenu } from './Common/SideMenu/SideMenu';
+export { default as TableUsers } from './Users/TableUsers/TableUsers';
+export { default as AddEditUserForm } from './Users/AddEditUserForm/AddEditUserForm';
+export { default as TopMenu } from './Common/TopMenu/TopMenu';

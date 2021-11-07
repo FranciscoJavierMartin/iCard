@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode, useContext } from 'react';
-import TopMenu from 'src/components/admin/TopMenu/TopMenu';
-import SideMenu from 'src/components/admin/SideMenu/SideMenu';
+import { TopMenu, SideMenu } from 'src/components/admin';
 import { AuthContext } from 'src/contexts';
 import { LoginAdmin } from 'src/pages/admin';
 import './AdminLayout.scss';
