@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { Loader } from 'semantic-ui-react';
+import { TableUsers } from 'src/components/admin';
 import Header from 'src/components/admin/Header/Header';
 import { useUser } from 'src/hooks';
 
@@ -17,14 +19,14 @@ export default function UsersAdmin() {
         btnClick={() => {
           console.log('hello');
         }}
-        btnTitleSecond='Remove user'
-        btnClickSecond={() => {
-          console.log('Bye');
-        }}
       />
-      {users.map(user => (
-        <div key={user.username}>{user.username}</div>
-      ))}
+      {loading ? (
+        <Loader active inline='centered'>
+          Loading...
+        </Loader>
+      ) : (
+        <TableUsers users={users} />
+      )}
     </>
   );
 }
