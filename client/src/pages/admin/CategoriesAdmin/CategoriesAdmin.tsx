@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Loader } from 'semantic-ui-react';
-import { Header } from 'src/components/admin';
+import { Header, TableCategoryAdmin } from 'src/components/admin';
 import { useCategory } from 'src/hooks';
 
 export default function CategoriesAdmin() {
@@ -22,7 +22,7 @@ export default function CategoriesAdmin() {
           Loading...
         </Loader>
       ) : (
-        <h2>Categories</h2>
+        <TableCategoryAdmin categories={categories} />
       )}
     </>
   );
