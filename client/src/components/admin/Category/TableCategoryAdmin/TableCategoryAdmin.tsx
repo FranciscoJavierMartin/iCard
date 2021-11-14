@@ -25,6 +25,26 @@ export default function TableCategoryAdmin({
             <Table.Cell width={2}>
               <Image src={category.image} />
             </Table.Cell>
+            <Table.Cell>{category.title}</Table.Cell>
+            <Table.Cell textAlign='right'>
+              <Button
+                icon
+                onClick={() => {
+                  console.log('Hello');
+                }}
+              >
+                <Icon name='pencil' />
+              </Button>
+              <Button
+                icon
+                negative
+                onClick={() => {
+                  console.log('Close');
+                }}
+              >
+                <Icon name='close' />
+              </Button>
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
