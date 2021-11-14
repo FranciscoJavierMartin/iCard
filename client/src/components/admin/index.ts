@@ -1,4 +1,5 @@
 export { default as TableCategoryAdmin } from './Category/TableCategoryAdmin/TableCategoryAdmin';
+export { default as AddEditCategoryForm } from './Category/AddEditCategoryForm/AddEditCategoryForm';
 export { default as LoginForm } from './Common/LoginForm/LoginForm';
 export { default as Header } from './Common/Header/Header';
 export { default as SideMenu } from './Common/SideMenu/SideMenu';
