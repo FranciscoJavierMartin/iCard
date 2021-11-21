@@ -18,7 +18,7 @@ const initialValues: FormValues = {
 };
 
 export default function LoginForm() {
-  const { login } = useContext<AuthContextState>(AuthContext);
+  // const { login } = useContext<AuthContextState>(AuthContext);
 
   const formik = useFormik<FormValues>({
     initialValues,
@@ -29,7 +29,7 @@ export default function LoginForm() {
     onSubmit: async (formValues: FormValues) => {
       try {
         const response = await loginApi(formValues.email, formValues.password);
-        await login(response.access);
+        // await login(response.access);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         toast.error(error.toString());

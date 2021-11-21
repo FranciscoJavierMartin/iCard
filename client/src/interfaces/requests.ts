@@ -17,3 +17,13 @@ export interface UpdateUserBodyRequest {
   is_active: boolean;
   is_staff: boolean;
 }
+
+export interface AddCategoryBodyRequest {
+  title: string;
+  image: string;
+}
+
+export interface UpdateCategoryBodyRequest {
+  title: string;
+  image: string;
+}
