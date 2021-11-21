@@ -5,10 +5,14 @@ import './TableCategoryAdmin.scss';
 
 interface TableCategoryAdminProps {
   categories: Category[];
+  updateCategory: (category: Category) => void;
+  removeCategory: (id: number) => void;
 }
 
 export default function TableCategoryAdmin({
   categories,
+  updateCategory,
+  removeCategory,
 }: TableCategoryAdminProps) {
   return (
     <Table className='table-category-admin'>
@@ -30,7 +34,7 @@ export default function TableCategoryAdmin({
               <Button
                 icon
                 onClick={() => {
-                  console.log('Hello');
+                  updateCategory(category);
                 }}
               >
                 <Icon name='pencil' />
@@ -39,7 +43,7 @@ export default function TableCategoryAdmin({
                 icon
                 negative
                 onClick={() => {
-                  console.log('Close');
+                  removeCategory(category.id);
                 }}
               >
                 <Icon name='close' />
